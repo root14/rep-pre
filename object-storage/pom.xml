@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.root14</groupId>
 	<artifactId>object-storage</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<name>object-storage</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
@@ -44,11 +44,19 @@
 
 	<build>
 		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-			</plugin>
 		</plugins>
 	</build>
+
+	<distributionManagement>
+		<!-- ... Some other Distribution repository definitions -->
+
+		<repository>
+			<id>repsy</id>
+			<name>My Private Maven Repository on Repsy </name>
+			<url>https://repo.repsy.io/mvn/root14/objectstorage</url>
+		</repository>
+
+		<!-- ... Some other Distribution repository definitions -->
+	</distributionManagement>
 
 </project>
