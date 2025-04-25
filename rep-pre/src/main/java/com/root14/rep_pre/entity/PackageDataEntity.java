@@ -16,9 +16,7 @@ public class PackageDataEntity {
     private String name;
     private String version;
     private String author;
-    //this field holds with .rep name+version
     private String repName;
-    //this field holds with .rep name+version
     private String metadataName;
 
     @Enumerated(EnumType.STRING)

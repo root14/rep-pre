@@ -20,17 +20,16 @@ public class MainController {
 
     /**
      * path variables are not validated due to
+     *
      * @see <a href="https://stackoverflow.com/a/78673113">this answer</a>
      */
     @PostMapping("/{packageName}/{version}")
     public ResponseEntity<?> deployPackage(@PathVariable String packageName, @PathVariable String version, @RequestParam MultipartFile packageFileRep, @RequestParam MultipartFile metadataJson) throws Exception {
-       return deploymentService.deploy(packageName,version,packageFileRep,metadataJson);
+        return deploymentService.deploy(packageName, version, packageFileRep, metadataJson);
     }
 
     @GetMapping("/{packageName}/{version}")
     public ResponseEntity<?> downloadPackage(@PathVariable String packageName, @PathVariable String version) throws Exception {
-        String result = "packageName:" + packageName + " version:" + version;
-        //todo add not use special chars for path-vars(xss ')
         return downloadService.download(packageName, version);
     }
 }
