@@ -20,8 +20,6 @@ public class DeploymentService {
     private final ExtensionValidator extensionValidator;
     private final PackageDataRepository packageDataRepository;
 
-    private final MinioClient minioClient;
-
     // 0|1 -> object-storage | file-system
     @Value("${storage.strategy}")
     private String storageFlag;
@@ -32,17 +30,16 @@ public class DeploymentService {
         this.storageStrategy = storageStrategy;
         this.extensionValidator = extensionValidator;
         this.packageDataRepository = packageDataRepository;
-        this.minioClient = minioClient;
     }
 
     public ResponseEntity<?> deploy(String packageName, String version, MultipartFile packageFileRep, MultipartFile metadataJson) throws Exception {
 
         if (packageFileRep == null && !extensionValidator.validateExtension(packageFileRep, ".rep")) {
-            return ResponseEntity.status(406).body("there should be .rep file!");
+            return ResponseEntity.status(406).body("there should be .rep file.");
         }
 
         if (metadataJson == null && !extensionValidator.validateExtension(metadataJson, ".json")) {
-            return ResponseEntity.status(406).body("there should be .json file!");
+            return ResponseEntity.status(406).body("there should be .json file.");
         }
 
         if (checkIfNameAndVersionExist(packageName, version)) {
@@ -62,12 +59,11 @@ public class DeploymentService {
         packageDataEntity.setDependenciesFromDto(packageInfo.getDependencies());
         packageDataEntity.setStorageType(getStorageType());
 
-        //save with name+version. with that what there can be same library name and different versions
-        packageDataEntity.setRepName(packageFileRep.getOriginalFilename() + version);
+
+        packageDataEntity.setRepName(packageFileRep.getOriginalFilename());
         storageStrategy.save(metadataJson, getStorageType());
 
-        //save with name+version. with that what there can be same library name and different versions
-        packageDataEntity.setMetadataName(metadataJson.getOriginalFilename() + version);
+        packageDataEntity.setMetadataName(metadataJson.getOriginalFilename());
         storageStrategy.save(metadataJson, getStorageType());
 
         //save to postgres for track the dependency
