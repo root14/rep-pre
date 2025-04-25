@@ -36,7 +36,6 @@ public class StorageStrategy implements StorageBase {
             }
             case OBJECT_STORAGE -> {
                 minioStorageUtil.uploadFile(minioClient, multipartFile, defaultBucketName);
-                MultipartFile result = minioStorageUtil.downloadFile(minioClient, defaultBucketName, multipartFile.getOriginalFilename());
                 return true;
             }
             default -> {

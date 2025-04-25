@@ -61,7 +61,7 @@ public class DeploymentService {
 
 
         packageDataEntity.setRepName(packageFileRep.getOriginalFilename());
-        storageStrategy.save(metadataJson, getStorageType());
+        storageStrategy.save(packageFileRep, getStorageType());
 
         packageDataEntity.setMetadataName(metadataJson.getOriginalFilename());
         storageStrategy.save(metadataJson, getStorageType());
