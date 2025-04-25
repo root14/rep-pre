@@ -60,7 +60,7 @@ public class DeploymentService {
         packageDataEntity.setAuthor(packageInfo.getAuthor());
         packageDataEntity.setVersion(version);
         packageDataEntity.setDependenciesFromDto(packageInfo.getDependencies());
-        packageDataEntity.setStorageType(StorageType.FILE_SYSTEM);
+        packageDataEntity.setStorageType(getStorageType());
 
         //save with name+version. with that what there can be same library name and different versions
         packageDataEntity.setRepName(packageFileRep.getOriginalFilename() + version);
